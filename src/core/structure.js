@@ -301,8 +301,8 @@ p5.prototype.redraw = function () {
 
   this._registeredMethods.pre.forEach(each, this);
   userDraw();
-
   this._registeredMethods.post.forEach(each, this);
+
   this.pop();
 };
 
