@@ -287,23 +287,23 @@ p5.prototype.popStyle = function() {
  *   </code></div>
  */
 p5.prototype.redraw = function () {
-  var userSetup = this.setup || window.setup;
-  var userDraw = this.draw || window.draw;
-  if (typeof userDraw === 'function') {
-    this.push();
-    if (typeof userSetup === 'undefined') {
-      this.scale(this.pixelDensity, this.pixelDensity);
-    }
-    var self = this;
-    this._registeredMethods.pre.forEach(function (f) {
-      f.call(self);
-    });
-    userDraw();
-    this._registeredMethods.post.forEach(function (f) {
-      f.call(self);
-    });
-    this.pop();
+  const userSetup = this.setup || window.setup;
+        userDraw  = this.draw  || window.draw;
+
+  if (typeof userDraw !== 'function')  return;
+
+  this.push();
+  userSetup == null && this.scale(this.pixelDensity, this.pixelDensity);
+
+  function each(f) {
+    f.call(this);
   }
+
+  this._registeredMethods.pre.forEach(each, this);
+  userDraw();
+
+  this._registeredMethods.post.forEach(each, this);
+  this.pop();
 };
 
 p5.prototype.size = function() {
