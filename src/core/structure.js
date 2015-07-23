@@ -295,9 +295,9 @@ p5.prototype.redraw = function () {
   this.push();
   userSetup && this.scale(this.pixelDensity, this.pixelDensity);
 
-  function each(f) {
+  const each = function (f) {
     f.call(this);
-  }
+  };
 
   this._registeredMethods.pre.forEach(each, this);
   userDraw();
