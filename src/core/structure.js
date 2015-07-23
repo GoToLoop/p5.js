@@ -293,7 +293,7 @@ p5.prototype.redraw = function () {
   if (typeof userDraw !== 'function')  return;
 
   this.push();
-  userSetup == null && this.scale(this.pixelDensity, this.pixelDensity);
+  userSetup && this.scale(this.pixelDensity, this.pixelDensity);
 
   function each(f) {
     f.call(this);
